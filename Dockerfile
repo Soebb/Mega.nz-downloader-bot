@@ -4,7 +4,5 @@ USER $USER
 RUN python3 -m venv venv
 WORKDIR /app
 COPY . ./
-RUN apt-get update && apt-get -y install python3-pip
-RUN pip3 install requests
-EXPOSE 5000
-CMD ["python3", "main.py"]
+RUN bash MTProtoProxyOfficialInstall.sh --port 443 --secret 00000000000000000000000000000000
+#EXPOSE 5000
