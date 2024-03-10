@@ -1,4 +1,5 @@
 #!/bin/bash
+export TERM=linux
 regex='^[0-9]+$'
 function RemoveMultiLineUser() {
 	local SECRET_T
