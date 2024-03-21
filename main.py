@@ -1,7 +1,8 @@
 import os
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-
+from mega import Mega
+mega = Mega()
 
 Bot = Client(
     "megaBot",
@@ -37,15 +38,13 @@ async def start(bot, update):
 
 @Bot.on_message(filters.private & filters.text)
 async def megadl(_, m):
-    msg = await m.reply("Downloading..")
-    media = await m.download()
-    await msg.edit_text("Processing..")
-    output_name = os.path.basename(media).rsplit('.', 1)[0] + ".srt"
-    ocr(media, output_name)
-    await m.reply_document(output_name)
+    url = m.text
+    msg = await m.reply("Processing..")
+    m = mega.login()
+    output_ = m.download_url(url)
+    await m.reply_document(output_)
     await msg.delete()
-    os.remove(output_name)
-    os.remove(media)
+    os.remove(output_)
 
 
 Bot.run()
