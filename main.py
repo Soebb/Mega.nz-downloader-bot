@@ -3,6 +3,7 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from mega import Mega
 mega = Mega()
+meg = mega.login()
 
 Bot = Client(
     "megaBot",
@@ -40,7 +41,6 @@ async def start(bot, update):
 async def megadl(_, m):
     url = m.text
     msg = await m.reply("Processing..")
-    meg = mega.login()
     output_ = meg.download_url(url)
     await m.reply_document(output_)
     await msg.delete()
