@@ -40,8 +40,8 @@ async def start(bot, update):
 async def megadl(_, m):
     url = m.text
     msg = await m.reply("Processing..")
-    m = mega.login()
-    output_ = m.download_url(url)
+    meg = mega.login()
+    output_ = meg.download_url(url)
     await m.reply_document(output_)
     await msg.delete()
     os.remove(output_)
